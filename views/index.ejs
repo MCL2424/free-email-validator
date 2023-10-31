@@ -1,36 +1,42 @@
-import express from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Free Email Validator</title>
+</head>
 
-const app = express();
-const port = 3000;
-const API_URL = "https://scraper.run";
+<body>
 
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
+  <div class="main-container">
+    <div class="container container-form">
+      <h1>Free email validator</h1>
+      <div class="container">
+        <form action="/" id="form" class="form" method="POST">
+          <label for="email">Enter the email you would like to validate:</label>
+          <input type="email" id="email" name="email">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
 
+      <% if (locals.content){ %>
+        <p class="response">Username: <span class="inside-response"><%= content.username%></span></p> 
+        <p class="response">Domain: <span class="inside-response"><%= content.domain%></span></p> 
+        <p class="response">Disposable Address: <span class="inside-response"><%= content.disposable%></span></p> 
+        <p class="response">Free Web Mail: <span class="inside-response"><%= content.webmail%></span></p> 
+        <p class="response">Server Available: <span class="inside-response"><%= content.mxvalid%></span></p> 
+      <% } else { %>
+        <p></p>
+     <% } %>
+    </div>
+  </div>
+  
 
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
+</body>
 
-app.post("/", async (req, res) => {
-  console.log(req.body);
-  const email= req.body.email;
-
-  try {
-    const response = await axios.get(API_URL + `/email?addr=${email}`);
-    const result = response.data;
-    res.render("index.ejs", { content: result});
-  } catch (error) {
-    console.error("Failed to make request:", error.message);
-    res.render("index.ejs", {
-      error: "No activities that match your criteria.",
-    });
-  }
-  });
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+</html>
