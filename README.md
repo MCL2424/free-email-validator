@@ -1,2 +1,2 @@
 # free-email-validator
-Free Email Validator
+Check an email address's validity in seconds!
