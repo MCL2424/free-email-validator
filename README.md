@@ -10,9 +10,6 @@ Summary of this project: Simple way to start learning about Node.js, npm package
 4. Run npm init on your terminal - this will create a new file called packaged.json
 5. Open packaged.json and underneath 
 
-When all the files are downloaded, you need to make sure that node.js is already installed on your computer.
-
-Then, you need to open your terminal, run npm init and install the following npm modules - TBC
 
 $npm i express (for PC)
 %npm i express (for Mac)
